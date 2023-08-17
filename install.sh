@@ -43,3 +43,9 @@ fi
 ln -sf ${LOCATION}/fish/config.fish ~/.config/fish/config.fish
 ln -sf ${LOCATION}/fish/functions/config.fish ~/.config/fish/functions/config.fish
 ln -sf ${LOCATION}/fish/functions/fish_greeting.fish ~/.config/fish/functions/fish_greeting.fish
+
+### GITCONFIG BLOCK
+git config --global color.ui auto
+git config --global merge.ff false
+git config --global pull.ff only
+git config --global fetch.prune true

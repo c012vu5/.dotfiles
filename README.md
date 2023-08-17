@@ -4,7 +4,9 @@
 My dotfiles to install init.el and fish related files.
 
 ## Usage
-Install emacs `init.el`, fish related files and embed `exec fish` in login shell rc file.
+- Install emacs `init.el` and fish related files
+- Embed `exec fish` in login shell rc file
+- Edit ~/.gitconfig
 
 ```console
 ./install.sh
