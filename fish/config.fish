@@ -3,7 +3,7 @@ if status is-interactive
     set -gx EDITOR /usr/bin/emacs
     abbr -a ls ls --color=auto
     abbr -a ll ls -la --color=auto
-    abbr -a mktemp pushd "$(mktemp -d)"
+    abbr -a mktemp pushd (mktemp -d)
     abbr -a emacs emacs -nw
     abbr -a extract grep -Ev \'^#\| +#\|^\$\'
     abbr -a cleanall 'paru -Qdtq | paru -Rs -'
