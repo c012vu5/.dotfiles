@@ -1,13 +1,16 @@
 # .dotfiles
 [![License](https://img.shields.io/github/license/c012vu5/.dotfiles.svg?style=flat-square)](./LICENSE) [![Ubuntu](https://github.com/c012vu5/.dotfiles/actions/workflows/ubuntu.yml/badge.svg)](https://github.com/c012vu5/.dotfiles/actions/workflows/ubuntu.yml)
 
-My dotfiles to install init.el and fish related files.
+My dotfiles to install init.el, fish related files, and so on.
 
 ## Usage
-- Install emacs `init.el` and fish related files
-- Embed `exec fish` in login shell rc file
-- Edit ~/.gitconfig
-
 ```console
 ./install.sh
 ```
+
+## Range
+This script will:
+- Embed `exec fish` in rc file of login shell
+- Install emacs `init.el`
+- Install fish related files
+- Edit ~/.gitconfig a.k.a. `git config --global`
