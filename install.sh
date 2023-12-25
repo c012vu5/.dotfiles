@@ -3,7 +3,7 @@
 LOCATION=$(dirname "$(readlink -f "$0")")
 
 main () {
-    dependencies dirname readlink basename grep cat mkdir ln git
+    dependencies readlink basename dirname grep cat mkdir ln git
     edit_loginshell
     edit_emacs
     edit_fish
