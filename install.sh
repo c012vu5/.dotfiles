@@ -31,12 +31,8 @@ edit_emacs () {
 }
 
 edit_fish () {
-    if [ ! -e ~/.config/fish/functions ]; then
-        mkdir -p ~/.config/fish/functions
-    fi
     ln -sf "${LOCATION}"/fish/config.fish ~/.config/fish/config.fish
-    ln -sf "${LOCATION}"/fish/functions/config.fish ~/.config/fish/functions/config.fish
-    ln -sf "${LOCATION}"/fish/functions/fish_greeting.fish ~/.config/fish/functions/fish_greeting.fish
+    ln -sf "${LOCATION}"/fish/functions ~/.config/fish/functions
 }
 
 edit_gitconfig () {
