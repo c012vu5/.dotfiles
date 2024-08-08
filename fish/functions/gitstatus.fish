@@ -1,15 +1,16 @@
-# Migrating bash to fish; https://gist.github.com/mzabriskie/6631607
+# Migrating bash script to fish; https://gist.github.com/mzabriskie/6631607
 # syntax check; fish -d debug script.fish
 
-function gitstatus -d "Check the status of all git repositories in a directory" -a dir
+function gitstatus -d "Check the status of all git repositories in a directory"
 
-    # set dir "$1"
+    set dir $argv
 
     # No directory has been provided, use current
     if [ -z "$dir" ]
         set dir (pwd)
     end
 
+    ### リストで与えられるディレクトリへの対応: 想定 gitstatus /path/to/dir1 /path/to/dir2
     # Make sure directory ends with "/"
     if [[ $dir != */ ]]
         set dir "$dir/*"
