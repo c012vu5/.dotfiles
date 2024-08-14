@@ -3,6 +3,8 @@
 
 function gitstatus -d "Check the status of all git repositories in a directory"
 
+    dependencies hoge || return 1
+
     set dir $argv
 
     # No directory has been provided, use current
