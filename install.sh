@@ -1,4 +1,5 @@
 #!/bin/sh
+# stdoutに操作ログを出力
 
 LOCATION=$(dirname "$(readlink -f "$0")")
 
@@ -27,12 +28,12 @@ edit_emacs () {
     if [ ! -e ~/.emacs.d ]; then
         mkdir -p ~/.emacs.d
     fi
-    ln -sf "${LOCATION}"/emacs.d/init.el ~/.emacs.d/init.el
+    ln -sb "${LOCATION}"/emacs.d/init.el ~/.emacs.d/init.el
 }
 
 edit_fish () {
-    ln -sf "${LOCATION}"/fish/config.fish ~/.config/fish/config.fish
-    ln -sf "${LOCATION}"/fish/functions ~/.config/fish/functions
+    ln -sb "${LOCATION}"/fish/config.fish ~/.config/fish/config.fish
+    find "${LOCATION}"/fish/functions/*.fish -type f -printf "%f\n" | xargs -I{} ln -sb "${LOCATION}"/fish/functions/{} ~/.config/fish/functions/{}
 }
 
 edit_gitconfig () {

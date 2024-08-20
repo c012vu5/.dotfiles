@@ -1,73 +1,54 @@
 # Migrating bash script to fish; https://gist.github.com/mzabriskie/6631607
-# syntax check; fish -d debug script.fish
+# 文字修飾が壊れているので修正
 
-function gitstatus -d "Check the status of all git repositories in a directory"
+function gitstatus -d "Check the status of all git repositories under specified directory"
 
-    dependencies hoge || return 1
+    dependencies find git grep xargs || return 1
 
     set dir $argv
-
-    # No directory has been provided, use current
-    if [ -z "$dir" ]
+    if [ (count $dir) -eq 0 ]
         set dir (pwd)
     end
 
-    ### リストで与えられるディレクトリへの対応: 想定 gitstatus /path/to/dir1 /path/to/dir2
-    # Make sure directory ends with "/"
-    if [[ $dir != */ ]]
-        set dir "$dir/*"
-    else
-        set dir "$dir*"
+    for element in $dir
+        if string match -q '*/' $element
+            set fixed $fixed "$element"
+        else
+            set fixed $fixed "$element/"
+        end
     end
 
-    # Loop all sub-directories
-    for f in $dir
-        # Only interested in directories
-        [ -d "${f}" ] || continue
-
-        echo -en "\033[0;35m"
-        echo "${f}"
-        echo -en "\033[0m"
-
-        # Check if directory is a git repository
-        if [ -d "$f/.git" ]
+    for element in $fixed
+        for repository in (find $element -type d -name .git | xargs dirname)
+            set -e status_msg
             set mod 0
-            cd $f
+            pushd $repository
+            printf "\033[0;35m%s\033[0m : " $repository
 
-            # Check for modified files
             if [ $(git status | grep modified -c) -ne 0 ]
                 set mod 1
-                echo -en "\033[0;31m"
-                echo "Modified files"
-                echo -en "\033[0m"
+                set status_msg "$status_msg\033[0;31mModified files\033[0m, "
             end
 
-            # Check for untracked files
             if [ $(git status | grep Untracked -c) -ne 0 ]
                 set mod 1
-                echo -en "\033[0;31m"
-                echo "Untracked files"
-                echo -en "\033[0m"
+                set status_msg "$status_msg\033[0;31mUntracked files\033[0m, "
             end
 
-            # Check for unpushed changes
             if [ $(git status | grep 'Your branch is ahead' -c) -ne 0 ]
-                    set mod 1
-                    echo -en "\033[0;31m"
-                    echo "Unpushed commit"
-                    echo -en "\033[0m"
+                set mod 1
+                set status_msg "$status_msg\033[0;31mUnpushed commit\033[0m, "
             end
 
-            # Check if everything is peachy keen
             if [ $mod -eq 0 ]
-                echo "Nothing to commit"
+                printf "Nothing to commit"
+            else
+                set status_msg (string trim -r -c ', ' $status_msg)
+                printf "%s" $status_msg
             end
 
-            cd ../
-        else
-            echo "Not a git repository"
+            echo
+            popd
         end
-
-        echo
     end
 end
