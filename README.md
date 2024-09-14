@@ -12,5 +12,5 @@ My dotfiles to install init.el, fish related files, and so on.
 This script will:
 - Embed `exec fish` in rc file of login shell
 - Create a symlink for emacs `init.el`
-- Create symlinks for fish related files
+- Create symlinks for fish related files; `config.fish`, `functions/*.fish`
 - Edit ~/.gitconfig a.k.a. `git config --global`

@@ -1,5 +1,4 @@
 #!/bin/sh
-# stdoutに操作ログを出力
 
 LOCATION=$(dirname "$(readlink -f "$0")")
 
