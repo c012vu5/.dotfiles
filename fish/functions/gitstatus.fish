@@ -1,5 +1,4 @@
 # Migrating bash script to fish; https://gist.github.com/mzabriskie/6631607
-# 文字修飾が壊れているので修正
 
 function gitstatus -d "Check the status of all git repositories under specified directory"
 
@@ -23,31 +22,27 @@ function gitstatus -d "Check the status of all git repositories under specified 
             set -e status_msg
             set mod 0
             pushd $repository
-            printf "\033[0;35m%s\033[0m : " $repository
 
-            if [ $(git status | grep modified -c) -ne 0 ]
+            if [ (git status | grep modified -c) -ne 0 ]
                 set mod 1
-                set status_msg "$status_msg\033[0;31mModified files\033[0m, "
+                set status_msg "$status_msg\e[0;31mModified files\e[0m, "
             end
 
-            if [ $(git status | grep Untracked -c) -ne 0 ]
+            if [ (git status | grep Untracked -c) -ne 0 ]
                 set mod 1
-                set status_msg "$status_msg\033[0;31mUntracked files\033[0m, "
+                set status_msg "$status_msg\e[0;31mUntracked files\e[0m, "
             end
 
-            if [ $(git status | grep 'Your branch is ahead' -c) -ne 0 ]
+            if [ (git status | grep 'Your branch is ahead' -c) -ne 0 ]
                 set mod 1
-                set status_msg "$status_msg\033[0;31mUnpushed commit\033[0m, "
+                set status_msg "$status_msg\e[0;31mUnpushed commit\e[0m, "
             end
 
-            if [ $mod -eq 0 ]
-                printf "Nothing to commit"
-            else
+            if [ $mod -ne 0 ]
                 set status_msg (string trim -r -c ', ' $status_msg)
-                printf "%s" $status_msg
+                echo -e "\e[0;35m$repository\e[0m : $status_msg"
             end
 
-            echo
             popd
         end
     end
