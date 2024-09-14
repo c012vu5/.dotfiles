@@ -3,7 +3,7 @@
 LOCATION=$(dirname "$(readlink -f "$0")")
 
 main () {
-    dependencies dirname readlink basename grep cat mkdir ln git
+    dependencies readlink basename dirname grep cat mkdir ln git
     edit_loginshell
     edit_emacs
     edit_fish
@@ -27,16 +27,12 @@ edit_emacs () {
     if [ ! -e ~/.emacs.d ]; then
         mkdir -p ~/.emacs.d
     fi
-    ln -sf "${LOCATION}"/emacs.d/init.el ~/.emacs.d/init.el
+    ln -sb "${LOCATION}"/emacs.d/init.el ~/.emacs.d/init.el
 }
 
 edit_fish () {
-    if [ ! -e ~/.config/fish/functions ]; then
-        mkdir -p ~/.config/fish/functions
-    fi
-    ln -sf "${LOCATION}"/fish/config.fish ~/.config/fish/config.fish
-    ln -sf "${LOCATION}"/fish/functions/config.fish ~/.config/fish/functions/config.fish
-    ln -sf "${LOCATION}"/fish/functions/fish_greeting.fish ~/.config/fish/functions/fish_greeting.fish
+    ln -sb "${LOCATION}"/fish/config.fish ~/.config/fish/config.fish
+    find "${LOCATION}"/fish/functions/*.fish -type f -printf "%f\n" | xargs -I{} ln -sb "${LOCATION}"/fish/functions/{} ~/.config/fish/functions/{}
 }
 
 edit_gitconfig () {
