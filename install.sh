@@ -36,6 +36,7 @@ edit_fish () {
 }
 
 edit_gitconfig () {
+    git config --global init.defaultBranch main
     git config --global color.ui auto
     git config --global merge.ff false
     git config --global pull.ff only
