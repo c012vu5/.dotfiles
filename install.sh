@@ -41,6 +41,11 @@ edit_gitconfig () {
     git config --global merge.ff false
     git config --global pull.ff only
     git config --global fetch.prune true
+    if [ -z "$(git config user.name)" ] || [ -z "$(git config user.email)" ]; then
+        printf "Check your git config : user.name or user.email is not set."
+        printf "  git config --global user.name \"Your Name\""
+        printf "  git config --global user.email \"YourMail@mail.com\""
+    fi
 }
 
 dependencies () {
