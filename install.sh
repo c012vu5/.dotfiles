@@ -46,6 +46,10 @@ edit_gitconfig () {
         printf "  git config --global user.name \"Your Name\""
         printf "  git config --global user.email \"YourMail@mail.com\""
     fi
+    if [ ! -e ~/.config/git ]; then
+        mkdir -p ~/.config/git
+    fi
+    ln -sb "${LOCATION}"/.gitignore ~/.config/git/ignore
 }
 
 dependencies () {
