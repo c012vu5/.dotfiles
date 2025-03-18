@@ -18,7 +18,7 @@ function gitstatus -d "Check the status of all git repositories under specified 
     end
 
     for element in $fixed
-        for repository in (find $element -type d -name .git | xargs dirname)
+        for repository in (find $element -type d -name .git | xargs -r dirname)
             set -e status_msg
             set mod 0
             pushd $repository
