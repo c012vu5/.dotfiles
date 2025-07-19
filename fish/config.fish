@@ -9,7 +9,8 @@ if status is-interactive
     abbr -a mktemp pushd (mktemp -d)
     abbr -a emacs emacs -nw
     abbr -a extract grep -Ev \'^#\| +#\|^\$\'
-    abbr -a cleanall 'paru -Qdtq | paru -Rs -'
-    abbr -a sshlog 'sudo journalctl --no-hostname --since "30 days ago" -u sshd | grep " Accepted "'
+    abbr -a cleanall 'paru -Qdtq | paru -Rs -' # will no longer be available
+    abbr -a sshlog 'sudo journalctl --no-hostname --since "30 days ago" -u sshd | grep " Accepted "' # will no longer be available
+    abbr -a listbanned 'sudo iptables -L sshguard -n'
     abbr -a gitlog git log --oneline --decorate --graph --branches --tags --remotes
 end
