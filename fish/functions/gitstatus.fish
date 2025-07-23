@@ -41,6 +41,8 @@ function gitstatus -d "Check the status of all git repositories under specified 
             if [ $mod -ne 0 ]
                 set status_msg (string trim -r -c ', ' $status_msg)
                 echo -e "\e[0;35m$repository\e[0m : $status_msg"
+            else
+                echo -e "\e[0;32mAll repositories clean, Nothing to commit in any working tree\e[0m"
             end
 
             popd
