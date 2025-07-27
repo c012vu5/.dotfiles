@@ -47,13 +47,13 @@ function gitstatus -d "Check the status of all git repositories under specified 
                 set dirty (math $dirty + 1)
                 set -e status_msg
                 if test "$has_modified" -eq 1
-                    set status_msg $status_msg (printf "\e[0;31mModified files\e[0m, ")
+                    set status_msg $status_msg (printf "\e[0;31mModified files\e[0m")
                 end
                 if test "$has_untracked" -eq 1
-                    set status_msg $status_msg (printf "\e[0;31mUntracked files\e[0m, ")
+                    set status_msg $status_msg (printf "\e[0;31mUntracked files\e[0m")
                 end
                 if test "$has_unpushed" -eq 1
-                    set status_msg $status_msg (printf "\e[0;31mUnpushed commit\e[0m, ")
+                    set status_msg $status_msg (printf "\e[0;31mUnpushed commit\e[0m")
                 end
                 printf "\e[0;35m%s\e[0m : %s\n" $repository (string join ', ' $status_msg)
             end
