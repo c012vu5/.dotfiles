@@ -14,3 +14,7 @@ This script will:
 - Create a symlink for emacs `init.el`
 - Create symlinks for fish related files; `config.fish`, `functions/*.fish`
 - Edit ~/.gitconfig a.k.a. `git config --global`
+
+### Handle this manually
+vscode settings
+- settings.json
