@@ -11,6 +11,6 @@ if status is-interactive
     abbr -a extract grep -Ev \'^#\| +#\|^\$\'
     abbr -a cleanall 'paru -Qdtq | paru -Rs -' # will no longer be available
     abbr -a sshlog 'sudo journalctl --no-hostname --since "30 days ago" -u sshd | grep " Accepted "' # will no longer be available
-    abbr -a listbanned "sudo iptables -L sshguard -n | tail -n +3 | awk '{print \$4}'"
+    abbr -a listbanned 'sudo nft list set ip sshguard attackers | grep -oP \'[\d.]+/\d+\'; sudo nft list set ip6 sshguard attackers | grep -oP \'[a-f0-9:]+/\d+\''
     abbr -a gitlog git log --oneline --decorate --graph --branches --tags --remotes
 end
